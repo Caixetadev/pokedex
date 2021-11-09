@@ -55,14 +55,6 @@ const showLoader = () => {
     removeLoader()
 }
 
-window.addEventListener('scroll', () => {
-    const { clientHeight, scrollHeight, scrollTop } = document.documentElement
-
-    if (scrollTop + clientHeight >= scrollHeight - 10) {
-        showLoader()
-    }
-})
-
 const seila = () => {
     const para = document.querySelectorAll('p')
     para.forEach(item => {
@@ -110,7 +102,10 @@ const search = async () => {
     containerApi.innerHTML = ''
     const inputValue = input.value
     const seila = await getPost(`pokemon/${inputValue}`)
-    containerSearch.innerHTML = `<h1>${seila.name}</h1>`
+    containerSearch.innerHTML += `
+    <h1>${seila.name}</h1>
+    <img src="${seila.sprites.other['official-artwork'].front_default}">
+    `
 }
 
 input.addEventListener('keypress', e => {
@@ -122,5 +117,12 @@ input.addEventListener('keypress', e => {
 buttonAll.addEventListener('click', () => {
     containerApi.innerHTML = ''
     addDom()
+    window.addEventListener('scroll', () => {
+        const { clientHeight, scrollHeight, scrollTop } = document.documentElement
+    
+        if (scrollTop + clientHeight >= scrollHeight - 10) {
+            showLoader()
+        }
+    })
 })
 
