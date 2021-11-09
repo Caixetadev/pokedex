@@ -31,7 +31,7 @@ a {
   height: 30px;
 }
 
-.pokemonAll {
+.pokemonAll, .typePokemons {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -54,7 +54,7 @@ a {
   padding-right: 30px;
 }
 
-.pokemonAll:hover {
+.pokemonAll:hover, .typePokemons:hover {
   transform: scale(1.1);
 }
 
@@ -107,6 +107,20 @@ a {
   margin: 0 auto;
   display: flex;
   align-self: center;
+}
+
+.containerSearch {
+  margin: 0 auto;
+  width: 1200px;
+  background: #fff;
+}
+
+.types {
+  display: none;
+  margin: 0 auto;
+  height: 500px;
+  width: 1200px;
+  background: #fff;
 }
 
 .loader {

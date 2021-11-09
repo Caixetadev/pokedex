@@ -4,6 +4,7 @@ const buttonAll = document.querySelector('.pokemonAll')
 const containerApi = document.querySelector('.containerAPI')
 const input = document.querySelector('.search')
 const containerSearch = document.querySelector('.containerSearch')
+const types = document.querySelector('.typePokemons')
 
 let limit = 36
 let offset = 0
@@ -126,3 +127,33 @@ buttonAll.addEventListener('click', () => {
     })
 })
 
+types.addEventListener('click', () => {
+    containerApi.innerHTML = ''
+    container.style.display = 'block'
+    const names = document.querySelectorAll('.typeLink')
+    names.forEach(item => {
+        const index = item.getAttribute('data-id')
+        const { url } = maria[index]
+        item.addEventListener('click', async () => {
+            const dados = await getPost(url)
+            dados.pokemon.forEach(item => {
+                typePokemon(item.pokemon.url)
+            })
+        })
+    })
+})
+
+const typePokemon = async (url) => {
+    const formatado = url.replace('https://pokeapi.co/api/v2/', '')
+    const dados = await getPost(formatado)
+    pokemonAll.innerHTML += `
+    <div class="cardPokemon">
+        <header>
+            <h3>${dados.name}</h3>
+            <span>${dados.id}</span>
+        </header>
+        <p data-type="${dados.types['0'].type.name}">${dados.types['0'].type.name}</p>
+        <img class="pokeImage" src="${dados.sprites.other['official-artwork'].front_default}">    
+    </div>
+    `
+}
