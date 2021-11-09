@@ -80,15 +80,33 @@ a {
   background: #fff;
   width: 220px;
   height: 200px;
+  border-radius: 1.5em;
+  padding: 0.8em;
 }
 
 .cardPokemon header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+  background: #fff;
+  border-radius: 10px 10px 0 0;
 }
 
-.cardPokemon img {
-  width: 140px;
+.cardPokemon header h3 {
+  font-size: 14px;
+}
+
+.cardPokemon p {
+  margin-top: 5px;
+  font-size: 12px;
+}
+
+.cardPokemon .pokeImage {
+  width: 7em;
+  margin: 0 auto;
+  display: flex;
+  align-self: center;
 }
 
 .loader {

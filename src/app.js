@@ -2,6 +2,8 @@ const pokemonAll = document.querySelector('.containerAll')
 const loader = document.querySelector('.loader')
 const buttonAll = document.querySelector('.pokemonAll')
 const containerApi = document.querySelector('.containerAPI')
+const input = document.querySelector('.search')
+const containerSearch = document.querySelector('.containerSearch')
 
 let limit = 36
 let offset = 0
@@ -28,7 +30,7 @@ const pokeImage = async (image) => {
             <span>${dados.id}</span>
         </header>
         <p data-type="${dados.types['0'].type.name}">${dados.types['0'].type.name}</p>
-        <img src="${dados.sprites.other['official-artwork'].front_default}">
+        <img class="pokeImage" src="${dados.sprites.other['official-artwork'].front_default}">    
     </div>
     `
     seila()
@@ -67,7 +69,7 @@ const seila = () => {
         let card = item.parentElement
         const type = item.getAttribute('data-type')
         if (type === 'fire') card.style.backgroundColor = '#fb926c'
-
+            
         if (type === 'grass') card.style.backgroundColor = '#48d0b0'
 
         if (type === 'bug') card.style.backgroundColor = '#53d26e'
@@ -103,6 +105,19 @@ const seila = () => {
         if (type === 'flying') card.style.backgroundColor = '#9fb9cb'
     })
 }
+
+const search = async () => {
+    containerApi.innerHTML = ''
+    const inputValue = input.value
+    const seila = await getPost(`pokemon/${inputValue}`)
+    containerSearch.innerHTML = `<h1>${seila.name}</h1>`
+}
+
+input.addEventListener('keypress', e => {
+    if (e.keyCode === 13) {
+        search()
+    }
+})
 
 buttonAll.addEventListener('click', () => {
     containerApi.innerHTML = ''
