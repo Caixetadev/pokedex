@@ -66,6 +66,31 @@ a {
   margin-top: 5vh;
 }
 
+.containerAll {
+  width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+  background: #fff;
+}
+
+.cardPokemon {
+  background: #fff;
+  width: 220px;
+  height: 200px;
+}
+
+.cardPokemon header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cardPokemon img {
+  width: 140px;
+}
+
 .loader {
     opacity: 0;
     display: flex;
