@@ -1,4 +1,5 @@
 const pokemonAll = document.querySelector('.containerAll')
+const loader = document.querySelector('.loader')
 
 let limit = 36
 let seila = 0
@@ -32,11 +33,23 @@ const getNextPosts = () => {
     }, 300)
 }
 
+const removeLoader = () => {
+    setTimeout(() => {
+        loader.classList.remove('show')
+        getNextPosts()
+    }, 1000)
+}
+
+const showLoader = () => {
+    loader.classList.add('show')
+    removeLoader()
+}
+
 window.addEventListener('scroll', () => {
     const { clientHeight, scrollHeight, scrollTop } = document.documentElement
 
     if (scrollTop + clientHeight >= scrollHeight - 10) {
-        getNextPosts()
+        showLoader()
     }
 })
 
