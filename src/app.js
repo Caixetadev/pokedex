@@ -1,16 +1,17 @@
 const pokemonAll = document.querySelector('.containerAll')
 const loader = document.querySelector('.loader')
+const buttonAll = document.querySelector('.pokemonAll')
 
 let limit = 36
-let seila = 0
+let offset = 0
 
-const getPost = async (teste) => {
-    const url = await fetch(`https://pokeapi.co/api/v2/${teste}`)
-    return url.json()
+const getPost = async (url) => {
+    const api = await fetch(`https://pokeapi.co/api/v2/${url}`)
+    return api.json()
 }
 
 const addDom = async () => {
-    const pokemon = await getPost(`pokemon?limit=${limit}&offset=${seila}`)
+    const pokemon = await getPost(`pokemon?limit=${limit}&offset=${offset}`)
     pokemon.results.map(item => {
         pokeImage(item.url)
     })
@@ -25,10 +26,9 @@ const pokeImage = async (image) => {
     `
 }
 
-const getNextPosts = () => {
+const getNextPokemons = () => {
     setTimeout(() => {
-        seila +=36
-        console.log(seila)
+        offset +=36
         addDom()
     }, 300)
 }
@@ -36,7 +36,7 @@ const getNextPosts = () => {
 const removeLoader = () => {
     setTimeout(() => {
         loader.classList.remove('show')
-        getNextPosts()
+        getNextPokemons()
     }, 1000)
 }
 
@@ -53,4 +53,7 @@ window.addEventListener('scroll', () => {
     }
 })
 
-addDom()
+buttonAll.addEventListener('click', () => {
+    addDom()
+})
+
