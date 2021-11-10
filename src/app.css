@@ -49,6 +49,10 @@ a {
     overflow: hidden;
 }
 
+.typePokemons img {
+  width: 20vw;
+}
+
 .pokemonAll img {
   width: 300px;
   padding-right: 30px;

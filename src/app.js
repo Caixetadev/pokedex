@@ -5,6 +5,7 @@ const containerApi = document.querySelector('.containerAPI')
 const input = document.querySelector('.search')
 const containerSearch = document.querySelector('.containerSearch')
 const types = document.querySelector('.typePokemons')
+const type = document.querySelector('.types')
 
 let limit = 36
 let offset = 0
@@ -103,7 +104,7 @@ const search = async () => {
     containerApi.innerHTML = ''
     const inputValue = input.value
     const seila = await getPost(`pokemon/${inputValue}`)
-    containerSearch.innerHTML += `
+    containerSearch.innerHTML = `
     <h1>${seila.name}</h1>
     <img src="${seila.sprites.other['official-artwork'].front_default}">
     `
@@ -148,6 +149,7 @@ types.addEventListener('click', () => {
 })
 
 const typePokemon = async (url) => {
+    type.style.display = 'none'
     const formatado = url.replace('https://pokeapi.co/api/v2/', '')
     const dados = await getPost(formatado)
     pokemonAll.innerHTML += `
