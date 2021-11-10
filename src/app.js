@@ -35,6 +35,7 @@ const pokeImage = async (image) => {
         <img class="pokeImage" src="${dados.sprites.other['official-artwork'].front_default}">    
     </div>
     `
+    click()
     colocandoCor()
 }
 
@@ -163,5 +164,24 @@ const typePokemon = async (url) => {
     </div>
     `
     colocandoCor()
+    click()
     
+}
+
+const click = async () => {
+    const card = document.querySelectorAll('.cardPokemon')
+    card.forEach(item => {
+        item.addEventListener('click', async () => {
+            pokemonAll.innerHTML = ''
+            const name = item.children
+            const namePokemon = name[0].children[0]
+            const dados = await getPost(`pokemon/${namePokemon.innerText}`)
+            containerSearch.innerHTML = `
+            
+            <h1>${dados.name}</h1>
+            <img src="${dados.sprites.other['official-artwork'].front_default}">
+            
+            `
+        })
+    })
 }
