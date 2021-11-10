@@ -1,6 +1,6 @@
 const container = document.querySelector('.types')
 
-const maria = [
+const apiNames = [
     {
         name: 'Eletric',
         url: 'type/13/'
@@ -11,7 +11,7 @@ const maria = [
     }
 ]
 
-maria.forEach((element, index) => {
+apiNames.forEach((element, index) => {
     container.innerHTML += `
     
     <a class="typeLink" data-id="${index}" href="#">${element.name}</a>

@@ -34,7 +34,7 @@ const pokeImage = async (image) => {
         <img class="pokeImage" src="${dados.sprites.other['official-artwork'].front_default}">    
     </div>
     `
-    seila()
+    colocandoCor()
 }
 
 const getNextPokemons = () => {
@@ -56,9 +56,9 @@ const showLoader = () => {
     removeLoader()
 }
 
-const seila = () => {
-    const para = document.querySelectorAll('p')
-    para.forEach(item => {
+const colocandoCor = () => {
+    const p = document.querySelectorAll('p')
+    p.forEach(item => {
         let card = item.parentElement
         const type = item.getAttribute('data-type')
         if (type === 'fire') card.style.backgroundColor = '#fb926c'
@@ -133,7 +133,7 @@ types.addEventListener('click', () => {
     const names = document.querySelectorAll('.typeLink')
     names.forEach(item => {
         const index = item.getAttribute('data-id')
-        const { url } = maria[index]
+        const { url } = apiNames[index]
         item.addEventListener('click', async () => {
             const dados = await getPost(url)
             dados.pokemon.forEach(item => {
@@ -156,6 +156,6 @@ const typePokemon = async (url) => {
         <img class="pokeImage" src="${dados.sprites.other['official-artwork'].front_default}">    
     </div>
     `
-    seila()
+    colocandoCor()
     
 }
