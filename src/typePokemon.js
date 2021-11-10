@@ -90,9 +90,11 @@ const apiNames = [
 
 apiNames.forEach((element, index) => {
     container.innerHTML += `
-    <a class="typeLink" data-id="${index}" href="#">${element.name}
-    <img src="${element.img}">
-    </a>
-
+    <div class="types-pokemon">
+        <a class="typeLink" style="display: block;" data-id="${index}" href="#">
+            <img src="${element.img}">
+            <p style="text-align: center;">${element.name}</p>
+        </a>
+    </div>
     `
 });

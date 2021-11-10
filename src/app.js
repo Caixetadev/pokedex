@@ -129,7 +129,11 @@ buttonAll.addEventListener('click', () => {
 
 types.addEventListener('click', () => {
     containerApi.innerHTML = ''
-    container.style.display = 'block'
+    container.style.cssText = `
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    `
     const names = document.querySelectorAll('.typeLink')
     names.forEach(item => {
         const index = item.getAttribute('data-id')
