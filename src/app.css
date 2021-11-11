@@ -135,8 +135,13 @@ a {
 }
 
 .bg {
+  transition: .4s;
   background: hsla(0,0%,100%,.47058823529411764);
   border-radius: 50%;
+}
+
+.bg:hover {
+  transform: scale(1.2);
 }
 
 .infoContainer {
@@ -199,6 +204,11 @@ a {
   padding: 1rem;
   margin: 0.3rem;
   border-radius: 1.2rem;
+  transition: .4s;
+}
+
+.infoContainerImage img:hover {
+  transform: scale(1.2);
 }
 
 .infoContainerData .headerData {
