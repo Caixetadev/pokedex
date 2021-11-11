@@ -31,7 +31,8 @@ const pokeImage = async (image) => {
             <h3>${dados.name}</h3>
             <span>${dados.id}</span>
         </header>
-        <p data-type="${dados.types['0'].type.name}">${dados.types[0].type.name} <br>${dados.types.length === 2 ? dados.types[1].type.name : ''}</p>
+        <p data-type="${dados.types['0'].type.name}">${dados.types[0].type.name}</p>
+        <p>${dados.types.length === 2 ? dados.types[1].type.name : ''}</p>
         <img class="pokeImage" src="${dados.sprites.other['official-artwork'].front_default}">    
     </div>
     `
@@ -102,6 +103,7 @@ const colocandoCor = () => {
 }
 
 const search = async () => {
+    type.style.display = 'none'
     containerApi.innerHTML = ''
     const inputValue = input.value
     const seila = await getPost(`pokemon/${inputValue}`)
@@ -237,7 +239,8 @@ const typePokemon = async (url) => {
             <h3>${dados.name}</h3>
             <span>${dados.id}</span>
         </header>
-        <p data-type="${dados.types['0'].type.name}">${dados.types[0].type.name} <br> ${dados.types.length === 2 ? dados.types[1].type.name : ''}</p>
+        <p data-type="${dados.types['0'].type.name}">${dados.types[0].type.name}</p>
+        <p>${dados.types.length === 2 ? dados.types[1].type.name : ''}</p>
         <img class="pokeImage" src="${dados.sprites.other['official-artwork'].front_default}">    
     </div>
     `

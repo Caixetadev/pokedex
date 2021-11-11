@@ -93,6 +93,14 @@ a {
   transition: .4s;
 }
 
+.cardPokemon p {
+  background: hsla(0,0%,100%,.47058823529411764);
+  border-radius: 5px;
+  margin-bottom: 3px;
+  width: 55px;
+  text-align: center;
+}
+
 .cardPokemon:hover {
   transform: scale(1.1);
 }
@@ -247,8 +255,21 @@ a {
   display: none;
   margin: 0 auto;
   height: 500px;
-  width: 1200px;
+  width: 900px;
   background: #fff;
+  border-radius: 1.5em;
+}
+
+.types-pokemon img {
+  transition: .4s;
+}
+
+.types-pokemon img:hover {
+  transform: scale(1.2);
+}
+
+.types p {
+  color: #303030
 }
 
 .loader {
