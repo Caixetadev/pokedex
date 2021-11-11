@@ -111,10 +111,8 @@ const search = async () => {
     const urlGeneration = oi.evolution_chain.url
     const generationFormatado = urlGeneration.replace('https://pokeapi.co/api/v2/', '')
     const generation = await getPost(generationFormatado)
-    const primeriaEvolucao = generation.chain.species.name
-    const evolucao1 = await getPost(`pokemon/${primeriaEvolucao}`)
-    const segundaEvolucao = generation.chain.evolves_to[0].species.name
-    const evolucao2 = await getPost(`pokemon/${segundaEvolucao}`)
+    const primeriaEvolucao = generation.chain.species.name === undefined ? '' : await getPost(`pokemon/${generation.chain.species.name}`)
+    const segundaEvolucao = generation.chain.evolves_to[0] === undefined ? '' : await getPost(`pokemon/${generation.chain.evolves_to[0].species.name}`)
     const terceiraEvolucao = generation.chain.evolves_to[0].evolves_to[0] === undefined ? '' : await getPost(`pokemon/${generation.chain.evolves_to[0].evolves_to[0].species.name}`)
     
     containerSearch.innerHTML = `
@@ -128,8 +126,8 @@ const search = async () => {
     <div>SPECIAL-ATTACK ${seila.stats[3].base_stat}</div>
     <div>SPECIAL-DEFENSE ${seila.stats[4].base_stat}</div>
     <div>SPEED ${seila.stats[5].base_stat}</div>
-    <img src="${evolucao1.sprites.other['official-artwork'].front_default}">
-    <img src="${evolucao2.sprites.other['official-artwork'].front_default}">
+    <img src="${primeriaEvolucao === '' ? '' : primeriaEvolucao.sprites.other['official-artwork'].front_default}">
+    <img src="${segundaEvolucao === '' ? '' : segundaEvolucao.sprites.other['official-artwork'].front_default}">
     <img src="${terceiraEvolucao === '' ? '' : terceiraEvolucao.sprites.other['official-artwork'].front_default}">
     `
 }
