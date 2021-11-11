@@ -31,7 +31,7 @@ a {
   height: 30px;
 }
 
-.pokemonAll, .typePokemons {
+.pokemonAll, .typePokemons, .randomPokemon {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -58,7 +58,7 @@ a {
   padding-right: 30px;
 }
 
-.pokemonAll:hover, .typePokemons:hover {
+.pokemonAll:hover, .typePokemons:hover, .randomPokemon:hover {
   transform: scale(1.1);
 }
 

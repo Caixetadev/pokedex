@@ -6,6 +6,7 @@ const input = document.querySelector('.search')
 const containerSearch = document.querySelector('.containerSearch')
 const types = document.querySelector('.typePokemons')
 const type = document.querySelector('.types')
+const randomButton = document.querySelector('.randomPokemon')
 
 let limit = 36
 let offset = 0
@@ -340,3 +341,95 @@ const click = async () => {
         })
     })
 }
+
+const randomNumbers = async (max = 898, min = 1) => {
+    type.style.display = 'none'
+    containerApi.innerHTML = ''
+    const random = Math.round(Math.random() * (max - min) + min)
+    console.log(random)
+    const bosta = await getPost(`pokemon/${random}`)
+    const species = bosta.species.url
+            const speciesFormatado = species.replace('https://pokeapi.co/api/v2/', '')
+            const oi = await getPost(speciesFormatado)
+            const urlGeneration = oi.evolution_chain.url
+            const generationFormatado = urlGeneration.replace('https://pokeapi.co/api/v2/', '')
+            const generation = await getPost(generationFormatado)
+            const primeriaEvolucao = generation.chain.species.name === undefined ? '' : await getPost(`pokemon/${generation.chain.species.name}`)
+            const segundaEvolucao = generation.chain.evolves_to[0] === undefined ? '' : await getPost(`pokemon/${generation.chain.evolves_to[0].species.name}`)
+            const terceiraEvolucao = generation.chain.evolves_to[0].evolves_to[0] === undefined ? '' : await getPost(`pokemon/${generation.chain.evolves_to[0].evolves_to[0].species.name}`)
+            
+            containerSearch.innerHTML = `
+            <div class="infoContainer">
+            <p data-type="${bosta.types['0'].type.name}"></p>
+        
+                <div class="infoContainerImage">
+                    <span>#${bosta.id}</span>
+                    <h1>${bosta.name}</h1>
+                    <img src="${bosta.sprites.other['official-artwork'].front_default}">
+                </div>
+                <div class="infoContainerData">
+                    <div class="abilities">
+                        <div class="headerData">
+                            Abilities
+                        </div>
+                        <div class="abilityList">
+                            <ul>
+                                <li>${bosta.abilities[0].ability.name}</li>
+                                <li>${bosta.abilities.length === 2 ? bosta.abilities[1].ability.name : ''}</li>
+                            </ul>
+                        </div>
+                        <div class="headerData">
+                            Base Stats
+                        </div>
+                        <div class="atributtes">
+                            <div class="containerColumns">
+                                <div class="red">HP</div>
+                                <div>${bosta.stats[0].base_stat}</div>
+                            </div>
+                            <div class="containerColumns">
+                                <div class="red">ATTACK</div>
+                                <div>${bosta.stats[1].base_stat}</div>
+                            </div>
+                            <div class="containerColumns">
+                                <div class="red">DEFENSE</div>
+                                <div>${bosta.stats[2].base_stat}</div>
+                            </div>
+                            <div class="containerColumns">
+                                <div class="red">SPECIAL-ATTACK</div>
+                                <div>${bosta.stats[3].base_stat}</div>
+                            </div>
+                            <div class="containerColumns">
+                                <div class="red">SPECIAL-DEFENSE</div>
+                                <div>${bosta.stats[4].base_stat}</div>
+                            </div>
+                            <div class="containerColumns">
+                                <div class="red">SPEED</div>
+                                <div>${bosta.stats[5].base_stat}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="headerData">
+                        Evolution
+                    </div>
+                    <div class="containerBg">
+                        <div class="bg">
+                            <img src="${primeriaEvolucao === '' ? '' : primeriaEvolucao.sprites.other['official-artwork'].front_default}">
+                        </div>
+                        <svg class="MuiSvgIcon-root arrow__right" focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path d="M16.01 11H4v2h12.01v3L20 12l-3.99-4z"></path></svg>
+                        <div class="bg">
+                            <img src="${segundaEvolucao === '' ? '' : segundaEvolucao.sprites.other['official-artwork'].front_default}">
+                        </div>
+                        <svg class="MuiSvgIcon-root arrow__right" focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path d="M16.01 11H4v2h12.01v3L20 12l-3.99-4z"></path></svg>
+                        <div class="bg">
+                            <img src="${terceiraEvolucao === '' ? 'fim' : terceiraEvolucao.sprites.other['official-artwork'].front_default}">
+                        </div>
+                    </div>
+                </div>
+            
+            </div>`
+            colocandoCor()
+}
+
+randomButton.addEventListener('click', () => {
+    randomNumbers()
+})
