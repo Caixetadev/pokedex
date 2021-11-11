@@ -7,7 +7,7 @@
 }
 
 body {
-  background: red;
+  background: #303030;
   font-family: 'Montserrat', sans-serif;
 }
 
@@ -40,7 +40,7 @@ a {
     font-size: 1.5rem;
     color: #222;
     background: #fff;
-    box-shadow: 3px 3px 5px rgb(114 6 6 / 59%);
+    box-shadow: 3px 3px 5px rgb(0 0 0 / 59%);
     border-radius: 10px;
     padding-left: 30px;
     margin-bottom: 30px;
@@ -71,7 +71,7 @@ a {
 }
 
 .containerAll {
-  box-shadow: 3px 3px 5px rgb(114 6 6 / 59%);
+  box-shadow: 3px 3px 5px rgb(0 0 0 / 59%);
   width: 1200px;
   margin: 0 auto;
   display: flex;
@@ -123,13 +123,14 @@ a {
 }
 
 .containerSearch {
-  box-shadow: 3px 3px 5px rgb(114 6 6 / 59%);
+  box-shadow: 3px 3px 5px rgb(0 0 0 / 59%);
   border-radius: 1.5em;
   margin: 0 auto;
   width: 900px;
 }
 
 .containerBg {
+  margin-top: 13px;
   display: flex;
 }
 

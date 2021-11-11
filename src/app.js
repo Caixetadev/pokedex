@@ -253,13 +253,87 @@ const click = async () => {
             pokemonAll.innerHTML = ''
             const name = item.children
             const namePokemon = name[0].children[0]
-            const dados = await getPost(`pokemon/${namePokemon.innerText}`)
+            const seila = await getPost(`pokemon/${namePokemon.innerText}`)
+            const species = seila.species.url
+            const speciesFormatado = species.replace('https://pokeapi.co/api/v2/', '')
+            const oi = await getPost(speciesFormatado)
+            const urlGeneration = oi.evolution_chain.url
+            const generationFormatado = urlGeneration.replace('https://pokeapi.co/api/v2/', '')
+            const generation = await getPost(generationFormatado)
+            const primeriaEvolucao = generation.chain.species.name === undefined ? '' : await getPost(`pokemon/${generation.chain.species.name}`)
+            const segundaEvolucao = generation.chain.evolves_to[0] === undefined ? '' : await getPost(`pokemon/${generation.chain.evolves_to[0].species.name}`)
+            const terceiraEvolucao = generation.chain.evolves_to[0].evolves_to[0] === undefined ? '' : await getPost(`pokemon/${generation.chain.evolves_to[0].evolves_to[0].species.name}`)
+            
             containerSearch.innerHTML = `
+            <div class="infoContainer">
+            <p data-type="${seila.types['0'].type.name}"></p>
+        
+                <div class="infoContainerImage">
+                    <span>#${seila.id}</span>
+                    <h1>${seila.name}</h1>
+                    <img src="${seila.sprites.other['official-artwork'].front_default}">
+                </div>
+                <div class="infoContainerData">
+                    <div class="abilities">
+                        <div class="headerData">
+                            Abilities
+                        </div>
+                        <div class="abilityList">
+                            <ul>
+                                <li>${seila.abilities[0].ability.name}</li>
+                                <li>${seila.abilities.length === 2 ? seila.abilities[1].ability.name : ''}</li>
+                            </ul>
+                        </div>
+                        <div class="headerData">
+                            Base Stats
+                        </div>
+                        <div class="atributtes">
+                            <div class="containerColumns">
+                                <div class="red">HP</div>
+                                <div>${seila.stats[0].base_stat}</div>
+                            </div>
+                            <div class="containerColumns">
+                                <div class="red">ATTACK</div>
+                                <div>${seila.stats[1].base_stat}</div>
+                            </div>
+                            <div class="containerColumns">
+                                <div class="red">DEFENSE</div>
+                                <div>${seila.stats[2].base_stat}</div>
+                            </div>
+                            <div class="containerColumns">
+                                <div class="red">SPECIAL-ATTACK</div>
+                                <div>${seila.stats[3].base_stat}</div>
+                            </div>
+                            <div class="containerColumns">
+                                <div class="red">SPECIAL-DEFENSE</div>
+                                <div>${seila.stats[4].base_stat}</div>
+                            </div>
+                            <div class="containerColumns">
+                                <div class="red">SPEED</div>
+                                <div>${seila.stats[5].base_stat}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="headerData">
+                        Evolution
+                    </div>
+                    <div class="containerBg">
+                        <div class="bg">
+                            <img src="${primeriaEvolucao === '' ? '' : primeriaEvolucao.sprites.other['official-artwork'].front_default}">
+                        </div>
+                        <svg class="MuiSvgIcon-root arrow__right" focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path d="M16.01 11H4v2h12.01v3L20 12l-3.99-4z"></path></svg>
+                        <div class="bg">
+                            <img src="${segundaEvolucao === '' ? '' : segundaEvolucao.sprites.other['official-artwork'].front_default}">
+                        </div>
+                        <svg class="MuiSvgIcon-root arrow__right" focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path d="M16.01 11H4v2h12.01v3L20 12l-3.99-4z"></path></svg>
+                        <div class="bg">
+                            <img src="${terceiraEvolucao === '' ? 'fim' : terceiraEvolucao.sprites.other['official-artwork'].front_default}">
+                        </div>
+                    </div>
+                </div>
             
-            <h1>${dados.name}</h1>
-            <img src="${dados.sprites.other['official-artwork'].front_default}">
-            
-            `
+            </div>`
+            colocandoCor()
         })
     })
 }
