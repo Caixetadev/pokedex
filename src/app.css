@@ -71,6 +71,7 @@ a {
 }
 
 .containerAll {
+  box-shadow: 3px 3px 5px rgb(114 6 6 / 59%);
   width: 1200px;
   margin: 0 auto;
   display: flex;
@@ -78,14 +79,22 @@ a {
   flex-wrap: wrap;
   gap: 30px;
   background: #fff;
+  border-radius: 1.5em;
 }
 
 .cardPokemon {
+  margin-top: 50px;
   background: #fff;
-  width: 220px;
-  height: 200px;
+  width: 240px;
+  height: 220px;
   border-radius: 1.5em;
   padding: 0.8em;
+  cursor: pointer;
+  transition: .4s;
+}
+
+.cardPokemon:hover {
+  transform: scale(1.1);
 }
 
 .cardPokemon header {
@@ -114,9 +123,15 @@ a {
 }
 
 .containerSearch {
+  box-shadow: 3px 3px 5px rgb(114 6 6 / 59%);
+  border-radius: 1.5em;
   margin: 0 auto;
   width: 1200px;
   background: #fff;
+}
+
+.containerSearch img {
+  
 }
 
 .types {

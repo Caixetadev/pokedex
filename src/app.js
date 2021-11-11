@@ -105,9 +105,32 @@ const search = async () => {
     containerApi.innerHTML = ''
     const inputValue = input.value
     const seila = await getPost(`pokemon/${inputValue}`)
+    const species = seila.species.url
+    const speciesFormatado = species.replace('https://pokeapi.co/api/v2/', '')
+    const oi = await getPost(speciesFormatado)
+    const urlGeneration = oi.evolution_chain.url
+    const generationFormatado = urlGeneration.replace('https://pokeapi.co/api/v2/', '')
+    const generation = await getPost(generationFormatado)
+    const primeriaEvolucao = generation.chain.species.name
+    const evolucao1 = await getPost(`pokemon/${primeriaEvolucao}`)
+    const segundaEvolucao = generation.chain.evolves_to[0].species.name
+    const evolucao2 = await getPost(`pokemon/${segundaEvolucao}`)
+    const terceiraEvolucao = generation.chain.evolves_to[0].evolves_to[0] === undefined ? '' : await getPost(`pokemon/${generation.chain.evolves_to[0].evolves_to[0].species.name}`)
+    
     containerSearch.innerHTML = `
     <h1>${seila.name}</h1>
+    <span>${seila.id}</span>
     <img src="${seila.sprites.other['official-artwork'].front_default}">
+    <p>${seila.abilities[0].ability.name} <br> ${seila.abilities.length === 2 ? seila.abilities[1].ability.name : ''}</p>
+    <div>HP${seila.stats[0].base_stat}</div>
+    <div>ATTACK ${seila.stats[1].base_stat}</div>
+    <div>DEFENSE ${seila.stats[2].base_stat}</div>
+    <div>SPECIAL-ATTACK ${seila.stats[3].base_stat}</div>
+    <div>SPECIAL-DEFENSE ${seila.stats[4].base_stat}</div>
+    <div>SPEED ${seila.stats[5].base_stat}</div>
+    <img src="${evolucao1.sprites.other['official-artwork'].front_default}">
+    <img src="${evolucao2.sprites.other['official-artwork'].front_default}">
+    <img src="${terceiraEvolucao === '' ? '' : terceiraEvolucao.sprites.other['official-artwork'].front_default}">
     `
 }
 
