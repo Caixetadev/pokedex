@@ -254,7 +254,7 @@ const click = async () => {
     const card = document.querySelectorAll('.cardPokemon')
     card.forEach(item => {
         item.addEventListener('click', async () => {
-            pokemonAll.innerHTML = ''
+            pokemonAll.style.display = 'none'
             const name = item.children
             const namePokemon = name[0].children[0]
             const seila = await getPost(`pokemon/${namePokemon.innerText}`)
