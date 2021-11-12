@@ -257,11 +257,11 @@ const click = async () => {
             pokemonAll.style.display = 'none'
             const name = item.children
             const namePokemon = name[0].children[0]
-            const seila = await getPost(`pokemon/${namePokemon.innerText}`)
-            const species = seila.species.url
+            const pokemon = await getPost(`pokemon/${namePokemon.innerText}`)
+            const species = pokemon.species.url
             const speciesFormatado = species.replace('https://pokeapi.co/api/v2/', '')
-            const oi = await getPost(speciesFormatado)
-            const urlGeneration = oi.evolution_chain.url
+            const specie = await getPost(speciesFormatado)
+            const urlGeneration = specie.evolution_chain.url
             const generationFormatado = urlGeneration.replace('https://pokeapi.co/api/v2/', '')
             const generation = await getPost(generationFormatado)
             const primeriaEvolucao = generation.chain.species.name === undefined ? '' : await getPost(`pokemon/${generation.chain.species.name}`)
@@ -270,12 +270,12 @@ const click = async () => {
             
             containerSearch.innerHTML = `
             <div class="infoContainer">
-            <p data-type="${seila.types['0'].type.name}"></p>
+            <p data-type="${pokemon.types['0'].type.name}"></p>
         
                 <div class="infoContainerImage">
-                    <span>#${seila.id}</span>
-                    <h1>${seila.name}</h1>
-                    <img src="${seila.sprites.other['official-artwork'].front_default}">
+                    <span>#${pokemon.id}</span>
+                    <h1>${pokemon.name}</h1>
+                    <img src="${pokemon.sprites.other['official-artwork'].front_default}">
                 </div>
                 <div class="infoContainerData">
                     <div class="abilities">
@@ -284,8 +284,8 @@ const click = async () => {
                         </div>
                         <div class="abilityList">
                             <ul>
-                                <li>${seila.abilities[0].ability.name}</li>
-                                <li>${seila.abilities.length === 2 ? seila.abilities[1].ability.name : ''}</li>
+                                <li>${pokemon.abilities[0].ability.name}</li>
+                                <li>${pokemon.abilities.length === 2 ? pokemon.abilities[1].ability.name : ''}</li>
                             </ul>
                         </div>
                         <div class="headerData">
@@ -294,27 +294,27 @@ const click = async () => {
                         <div class="atributtes">
                             <div class="containerColumns">
                                 <div class="red">HP</div>
-                                <div>${seila.stats[0].base_stat}</div>
+                                <div>${pokemon.stats[0].base_stat}</div>
                             </div>
                             <div class="containerColumns">
                                 <div class="red">ATTACK</div>
-                                <div>${seila.stats[1].base_stat}</div>
+                                <div>${pokemon.stats[1].base_stat}</div>
                             </div>
                             <div class="containerColumns">
                                 <div class="red">DEFENSE</div>
-                                <div>${seila.stats[2].base_stat}</div>
+                                <div>${pokemon.stats[2].base_stat}</div>
                             </div>
                             <div class="containerColumns">
                                 <div class="red">SPECIAL-ATTACK</div>
-                                <div>${seila.stats[3].base_stat}</div>
+                                <div>${pokemon.stats[3].base_stat}</div>
                             </div>
                             <div class="containerColumns">
                                 <div class="red">SPECIAL-DEFENSE</div>
-                                <div>${seila.stats[4].base_stat}</div>
+                                <div>${pokemon.stats[4].base_stat}</div>
                             </div>
                             <div class="containerColumns">
                                 <div class="red">SPEED</div>
-                                <div>${seila.stats[5].base_stat}</div>
+                                <div>${pokemon.stats[5].base_stat}</div>
                             </div>
                         </div>
                     </div>
@@ -346,12 +346,11 @@ const randomNumbers = async (max = 898, min = 1) => {
     type.style.display = 'none'
     containerApi.innerHTML = ''
     const random = Math.round(Math.random() * (max - min) + min)
-    console.log(random)
-    const bosta = await getPost(`pokemon/${random}`)
-    const species = bosta.species.url
+    const pokemonRandom = await getPost(`pokemon/${random}`)
+    const species = pokemonRandom.species.url
             const speciesFormatado = species.replace('https://pokeapi.co/api/v2/', '')
-            const oi = await getPost(speciesFormatado)
-            const urlGeneration = oi.evolution_chain.url
+            const specie = await getPost(speciesFormatado)
+            const urlGeneration = specie.evolution_chain.url
             const generationFormatado = urlGeneration.replace('https://pokeapi.co/api/v2/', '')
             const generation = await getPost(generationFormatado)
             const primeriaEvolucao = generation.chain.species.name === undefined ? '' : await getPost(`pokemon/${generation.chain.species.name}`)
@@ -360,12 +359,12 @@ const randomNumbers = async (max = 898, min = 1) => {
             
             containerSearch.innerHTML = `
             <div class="infoContainer">
-            <p data-type="${bosta.types['0'].type.name}"></p>
+            <p data-type="${pokemonRandom.types['0'].type.name}"></p>
         
                 <div class="infoContainerImage">
-                    <span>#${bosta.id}</span>
-                    <h1>${bosta.name}</h1>
-                    <img src="${bosta.sprites.other['official-artwork'].front_default}">
+                    <span>#${pokemonRandom.id}</span>
+                    <h1>${pokemonRandom.name}</h1>
+                    <img src="${pokemonRandom.sprites.other['official-artwork'].front_default}">
                 </div>
                 <div class="infoContainerData">
                     <div class="abilities">
@@ -374,8 +373,8 @@ const randomNumbers = async (max = 898, min = 1) => {
                         </div>
                         <div class="abilityList">
                             <ul>
-                                <li>${bosta.abilities[0].ability.name}</li>
-                                <li>${bosta.abilities.length === 2 ? bosta.abilities[1].ability.name : ''}</li>
+                                <li>${pokemonRandom.abilities[0].ability.name}</li>
+                                <li>${pokemonRandom.abilities.length === 2 ? pokemonRandom.abilities[1].ability.name : ''}</li>
                             </ul>
                         </div>
                         <div class="headerData">
@@ -384,27 +383,27 @@ const randomNumbers = async (max = 898, min = 1) => {
                         <div class="atributtes">
                             <div class="containerColumns">
                                 <div class="red">HP</div>
-                                <div>${bosta.stats[0].base_stat}</div>
+                                <div>${pokemonRandom.stats[0].base_stat}</div>
                             </div>
                             <div class="containerColumns">
                                 <div class="red">ATTACK</div>
-                                <div>${bosta.stats[1].base_stat}</div>
+                                <div>${pokemonRandom.stats[1].base_stat}</div>
                             </div>
                             <div class="containerColumns">
                                 <div class="red">DEFENSE</div>
-                                <div>${bosta.stats[2].base_stat}</div>
+                                <div>${pokemonRandom.stats[2].base_stat}</div>
                             </div>
                             <div class="containerColumns">
                                 <div class="red">SPECIAL-ATTACK</div>
-                                <div>${bosta.stats[3].base_stat}</div>
+                                <div>${pokemonRandom.stats[3].base_stat}</div>
                             </div>
                             <div class="containerColumns">
                                 <div class="red">SPECIAL-DEFENSE</div>
-                                <div>${bosta.stats[4].base_stat}</div>
+                                <div>${pokemonRandom.stats[4].base_stat}</div>
                             </div>
                             <div class="containerColumns">
                                 <div class="red">SPEED</div>
-                                <div>${bosta.stats[5].base_stat}</div>
+                                <div>${pokemonRandom.stats[5].base_stat}</div>
                             </div>
                         </div>
                     </div>
