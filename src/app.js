@@ -115,7 +115,7 @@ async function getEvolutions(generation) {
     (await getPost(`pokemon/${generationsChain.evolves_to[0].species.name}`));
 
   const terceiraEvolucao =
-    !!generationsChain.evolves_to[0].evolves_to[0] &&
+    !!generationsChain?.evolves_to[0]?.evolves_to[0] &&
     (await getPost(
       `pokemon/${generationsChain.evolves_to[0].evolves_to[0].species.name}`
     ));
@@ -216,99 +216,6 @@ const colocandoCor = () => {
 };
 
 const search = async () => {
-<<<<<<< HEAD
-    type.style.display = 'none'
-    containerApi.innerHTML = ''
-    const inputValue = input.value
-    const seila = await getPost(`pokemon/${inputValue}`)
-    const species = seila.species.url
-    const speciesFormatado = species.replace('https://pokeapi.co/api/v2/', '')
-    const oi = await getPost(speciesFormatado)
-    const urlGeneration = oi.evolution_chain.url
-    const generationFormatado = urlGeneration.replace('https://pokeapi.co/api/v2/', '')
-    const generation = await getPost(generationFormatado)
-    const primeriaEvolucao = generation.chain.species.name === undefined ? '' : await getPost(`pokemon/${generation.chain.species.name}`)
-    const segundaEvolucao = generation.chain.evolves_to[0] === undefined ? '' : await getPost(`pokemon/${generation.chain.evolves_to[0].species.name}`)
-    const terceiraEvolucao = generation?.chain?.evolves_to?.[0] === undefined ? '' : await getPost(`pokemon/${generation.chain.evolves_to[0].evolves_to[0].species.name}`)
-    
-    containerSearch.innerHTML = `
-    <div class="infoContainer">
-    <p data-type="${seila.types['0'].type.name}"></p>
-
-        <div class="infoContainerImage">
-            <span>#${seila.id}</span>
-            <h1>${seila.name}</h1>
-            <img src="${seila.sprites.other['official-artwork'].front_default}">
-        </div>
-        <div class="infoContainerData">
-            <div class="abilities">
-                <div class="headerData">
-                    Abilities
-                </div>
-                <div class="abilityList">
-                    <ul>
-                        <li>${seila.abilities[0].ability.name}</li>
-                        <li>${seila.abilities.length === 2 ? seila.abilities[1].ability.name : ''}</li>
-                    </ul>
-                </div>
-                <div class="headerData">
-                    Base Stats
-                </div>
-                <div class="atributtes">
-                    <div class="containerColumns">
-                        <div class="red">HP</div>
-                        <div>${seila.stats[0].base_stat}</div>
-                    </div>
-                    <div class="containerColumns">
-                        <div class="red">ATTACK</div>
-                        <div>${seila.stats[1].base_stat}</div>
-                    </div>
-                    <div class="containerColumns">
-                        <div class="red">DEFENSE</div>
-                        <div>${seila.stats[2].base_stat}</div>
-                    </div>
-                    <div class="containerColumns">
-                        <div class="red">SPECIAL-ATTACK</div>
-                        <div>${seila.stats[3].base_stat}</div>
-                    </div>
-                    <div class="containerColumns">
-                        <div class="red">SPECIAL-DEFENSE</div>
-                        <div>${seila.stats[4].base_stat}</div>
-                    </div>
-                    <div class="containerColumns">
-                        <div class="red">SPEED</div>
-                        <div>${seila.stats[5].base_stat}</div>
-                    </div>
-                </div>
-            </div>
-            <div class="headerData">
-                Evolution
-            </div>
-            <div class="containerBg">
-                <div class="bg">
-                    <img src="${primeriaEvolucao === '' ? '' : primeriaEvolucao.sprites.other['official-artwork'].front_default}">
-                </div>
-                <svg class="MuiSvgIcon-root arrow__right" focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path d="M16.01 11H4v2h12.01v3L20 12l-3.99-4z"></path></svg>
-                <div class="bg">
-                    <img src="${segundaEvolucao === '' ? '' : segundaEvolucao.sprites.other['official-artwork'].front_default}">
-                </div>
-                <svg class="MuiSvgIcon-root arrow__right" focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path d="M16.01 11H4v2h12.01v3L20 12l-3.99-4z"></path></svg>
-                <div class="bg">
-                    <img src="${terceiraEvolucao === '' ? 'fim' : terceiraEvolucao.sprites.other['official-artwork'].front_default}">
-                </div>
-            </div>
-        </div>
-    
-    </div>
-    
-    `
-    colocandoCor()
-}
-
-input.addEventListener('keypress', e => {
-    if (e.keyCode === 13) {
-        search()
-=======
   type.style.display = "none";
   containerApi.innerHTML = "";
   const inputValue = input.value;
@@ -330,7 +237,7 @@ input.addEventListener('keypress', e => {
     !!generation.chain.evolves_to[0] &&
     (await getPost(`pokemon/${generation.chain.evolves_to[0].species.name}`));
   const terceiraEvolucao =
-    !!generation.chain.evolves_to[0].evolves_to[0] &&
+    !!generation?.chain?.evolves_to[0]?.evolves_to[0] &&
     (await getPost(
       `pokemon/${generation.chain.evolves_to[0].evolves_to[0].species.name}`
     ));
@@ -358,7 +265,6 @@ buttonAll.addEventListener("click", () => {
 
     if (scrollTop + clientHeight >= scrollHeight - 10) {
       showLoader();
->>>>>>> 9bb9cd1002f97b8ff2f3168d53bca4a792f19c75
     }
   });
 });
