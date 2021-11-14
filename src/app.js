@@ -90,13 +90,15 @@ function genereateEvolutionsView(
                 ? `<div class="bg">
                      <img src="${segundaEvolucao.sprites.other["official-artwork"].front_default}">
                 </div>
-                <svg class="MuiSvgIcon-root arrow__right" focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path d="M16.01 11H4v2h12.01v3L20 12l-3.99-4z"></path></svg>`
+                `
                 : ""
             }   
 
             ${
               terceiraEvolucao
-                ? `<div class="bg">
+                ? `
+                <svg class="MuiSvgIcon-root arrow__right" focusable="false" viewBox="0 0 24 24" aria-hidden="true"><path d="M16.01 11H4v2h12.01v3L20 12l-3.99-4z"></path></svg>
+                <div class="bg">
                     <img src="${terceiraEvolucao.sprites.other["official-artwork"].front_default}">
                 </div>`
                 : ""
