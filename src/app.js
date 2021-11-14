@@ -7,6 +7,11 @@ const containerSearch = document.querySelector(".containerSearch");
 const types = document.querySelector(".typePokemons");
 const type = document.querySelector(".types");
 const randomButton = document.querySelector(".randomPokemon");
+const logo = document.querySelector('.logo')
+
+logo.addEventListener('click', () => {
+  document.location.reload(true)
+})
 
 function genereateEvolutionsView(
   pokemon,
