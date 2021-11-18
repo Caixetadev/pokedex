@@ -190,7 +190,7 @@ a {
   gap: 0 15px;
   -webkit-align-items: center;
   align-items: center;
-  webkit-justify-content: space-between;
+  -webkit-justify-content: space-between;
   justify-content: space-between;
   background-color: hsla(0,0%,100%,.25098039215686274);
   padding: 10px;
@@ -269,6 +269,8 @@ a {
 
 .types-pokemon img {
   transition: .4s;
+  border-radius: 50%;
+  -webkit-border-radius: 50%; 
 }
 
 .types-pokemon img:hover {
